@@ -2,12 +2,14 @@ package com.example.marvelbrowser
 
 import android.app.Application
 import android.content.Context
+import com.example.marvelbrowser.data.CharacterStoreController
 import com.example.marvelbrowser.di.activityModule
 import com.example.marvelbrowser.di.networkModule
 import com.example.marvelbrowser.di.viewModelModule
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 import timber.log.Timber
 import kotlin.properties.Delegates
@@ -36,4 +38,7 @@ class MarvelApp: Application(), KodeinAware {
 
 val appModule = Kodein.Module("AppModule") {
     bind<Context>() with singleton { appInstance }
+    bind<CharacterStoreController>() with singleton {
+        CharacterStoreController(instance())
+    }
 }

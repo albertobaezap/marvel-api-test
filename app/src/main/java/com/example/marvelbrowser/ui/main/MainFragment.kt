@@ -4,7 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.marvelbrowser.R
 import com.example.marvelbrowser.databinding.MainFragmentBinding
 import com.example.marvelbrowser.di.mainViewModel
 import com.example.marvelbrowser.ui.adapter.CharacterListAdapter
@@ -14,10 +20,6 @@ import org.kodein.di.android.x.closestKodein
 import timber.log.Timber
 
 class MainFragment : Fragment(), KodeinAware {
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     override val kodein: Kodein by closestKodein()
 
@@ -37,23 +39,36 @@ class MainFragment : Fragment(), KodeinAware {
 
         setupViews()
 
-        viewModel.getCharacterList()
-
         listenToCharacterList()
     }
 
     private fun setupViews() {
         with(binding) {
-            characterListAdapter = CharacterListAdapter()
+            characterListAdapter = CharacterListAdapter(requireContext()) {
+                val bundle = bundleOf("characterId" to it)
+                findNavController().navigate(R.id.to_detail_fragment, bundle)
+            }
+
+            characterList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if (characterList.getChildAt(0).bottom
+                        <= (characterList.height + characterList.scrollY)
+                    ) {
+                        //If we scroll too fast to the botton, we stop receiving updates.
+                        characterListAdapter.notifyDataSetChanged()
+                    }
+                }
+            })
             characterList.adapter = characterListAdapter
+            characterList.addItemDecoration(DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL))
         }
     }
 
     private fun listenToCharacterList() =
         viewModel.getCharacterLiveData().observe(viewLifecycleOwner, { list ->
             list?.let {
-                characterListAdapter.append(it)
+                characterListAdapter.characterList = it
             } ?: Timber.w("List was null!")
         })
-
 }

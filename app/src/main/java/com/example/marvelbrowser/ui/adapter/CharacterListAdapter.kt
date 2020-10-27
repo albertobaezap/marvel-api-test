@@ -1,32 +1,38 @@
 package com.example.marvelbrowser.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvelbrowser.GenericDiff
 import com.example.marvelbrowser.databinding.CharacterListItemBinding
 import com.example.marvelbrowser.model.Character
 import com.squareup.picasso.Picasso
 import timber.log.Timber
 
-class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.CharacterListItemHolder>() {
+class CharacterListAdapter(private val context: Context, private val onItemClicked: (Int) -> Unit) :
+    RecyclerView.Adapter<CharacterListAdapter.CharacterListItemHolder>() {
 
     companion object {
-        private const val INVALID_IMAGE_PATH = "image_not_available"
+        const val INVALID_IMAGE_PATH = "image_not_available"
+        const val LOAD_IMAGE_TAG = "load_image"
     }
 
-    var characterList: MutableList<Character> = mutableListOf()
-
-    fun append(items: List<Character>) {
-        characterList.addAll(characterList.count(), items)
-        notifyDataSetChanged()
-    }
+    var characterList: List<Character> = mutableListOf()
+        set(value) {
+            val diffResult = DiffUtil.calculateDiff(GenericDiff(field, value) { it.id })
+            field = value
+            diffResult.dispatchUpdatesTo(this)
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterListItemHolder =
         CharacterListItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
-        ).run { CharacterListItemHolder(this) }
+        ).run { CharacterListItemHolder(this, onItemClicked) }
 
     override fun onBindViewHolder(holder: CharacterListItemHolder, position: Int) =
         holder.bindCharacter(characterList[position])
@@ -43,7 +49,10 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.Character
         return position
     }
 
-    class CharacterListItemHolder(private val binding: CharacterListItemBinding) :
+    inner class CharacterListItemHolder(
+        private val binding: CharacterListItemBinding,
+        private val onItemClicked: (Int) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindCharacter(character: Character) {
@@ -57,12 +66,15 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.Character
                     Picasso.with(root.context)
                         //There is an error when trying to load HTTP images from the source, so we'll change protocols
                         .load(thumbnailUrl.replace("http", "https"))
+                        .fit()
+                        .tag(LOAD_IMAGE_TAG)
                         .into(characterItemThumbnail)
+                    characterItemThumbnail.visibility = View.VISIBLE
                 }
 
                 //Go to detail view
                 root.setOnClickListener {
-                    Timber.d("Detail view for ${character.name}")
+                    onItemClicked(character.id)
                 }
             }
         }
