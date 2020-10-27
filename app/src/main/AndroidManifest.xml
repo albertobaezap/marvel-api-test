@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MarvelBrowser">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <nav-graph android:value="@navigation/main_navigation" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

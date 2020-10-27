@@ -15,7 +15,7 @@ data class CharacterDataWrapper(
     val limit: Int?,
     val copyright: String?,
     val attributionText: String?,
-    val attributionHtml: String?,
+    val attributionHTML: String?,
     val data: CharacterDataContainer,
     val etag: String
 )
@@ -25,7 +25,7 @@ data class CharacterDataContainer(
     val limit: Int,
     val total: Int,
     val count: Int,
-    val result: List<Character>
+    val results: List<Character>
 )
 
 //Data class for every Marvel character
@@ -33,14 +33,14 @@ data class Character(
     val id: Int,
     val name: String,
     val description: String,
-    val modified: Date,
-    val resourceUri: Url,
+    val modified: String,
+    val resourceURI: Url,
     val urls: List<UrlObject>,
     val thumbnail: Image,
-    val comics: List<ItemList.ComicItemList>,
-    val stories: List<ItemList.StoryItemList>,
-    val events: List<ItemList.EventItemList>,
-    val series: List<ItemList.SeriesItemList>
+    val comics: ItemList.ComicItemList,
+    val stories: ItemList.StoryItemList,
+    val events: ItemList.EventItemList,
+    val series: ItemList.SeriesItemList
 )
 
 data class UrlObject(
@@ -61,45 +61,50 @@ enum class ItemType {
 sealed class ItemList(open val itemType: ItemType) {
     abstract val available: Int
     abstract val returned: Int
-    abstract val collectionUri: Url
+    abstract val collectionURI: Url
     abstract val items: List<BaseItemSummary>
 
     data class ComicItemList(
         override val available: Int,
         override val returned: Int,
-        override val collectionUri: Url,
-        override val items: List<BaseItemSummary>
-    ): ItemList(ItemType.COMIC)
+        override val collectionURI: Url,
+        override val items: List<ItemSummary>
+    ) : ItemList(ItemType.COMIC)
 
     data class EventItemList(
         override val available: Int,
         override val returned: Int,
-        override val collectionUri: Url,
-        override val items: List<BaseItemSummary>
-    ): ItemList(ItemType.EVENT)
+        override val collectionURI: Url,
+        override val items: List<ItemSummary>
+    ) : ItemList(ItemType.EVENT)
 
     data class SeriesItemList(
         override val available: Int,
         override val returned: Int,
-        override val collectionUri: Url,
-        override val items: List<BaseItemSummary>
-    ): ItemList(ItemType.SERIES)
+        override val collectionURI: Url,
+        override val items: List<ItemSummary>
+    ) : ItemList(ItemType.SERIES)
 
     data class StoryItemList(
         override val available: Int,
         override val returned: Int,
-        override val collectionUri: Url,
+        override val collectionURI: Url,
         override val items: List<StoryItemSummary>
-    ): ItemList(ItemType.STORY)
+    ) : ItemList(ItemType.STORY)
 
     interface BaseItemSummary {
-        val resourceUri: Url
+        val resourceURI: Url
         val name: String
     }
 
+    data class ItemSummary(
+        override val resourceURI: Url,
+        override val name: String
+    ) : BaseItemSummary
+
     data class StoryItemSummary(
-        override val resourceUri: Url,
+        override val resourceURI: Url,
         override val name: String,
         val type: String
-    ): BaseItemSummary
+    ) : BaseItemSummary
 }
