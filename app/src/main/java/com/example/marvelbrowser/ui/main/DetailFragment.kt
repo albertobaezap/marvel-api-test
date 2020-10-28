@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.marvelbrowser.databinding.DetailFragmentBinding
+import com.example.marvelbrowser.di.mainViewModel
 import com.example.marvelbrowser.model.Character
 import com.example.marvelbrowser.model.ItemType
 import com.example.marvelbrowser.ui.adapter.CharacterListAdapter
@@ -16,7 +17,6 @@ import com.squareup.picasso.Picasso
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
 /**
  * Detail fragment for an individual [Character]
@@ -25,7 +25,7 @@ class DetailFragment : Fragment(), KodeinAware {
 
     override val kodein: Kodein by closestKodein()
 
-    private val detailViewModel: DetailViewModel by instance()
+    private val detailViewModel: DetailViewModel by mainViewModel()
 
     private lateinit var binding: DetailFragmentBinding
 

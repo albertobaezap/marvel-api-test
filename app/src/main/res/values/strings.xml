@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MarvelBrowser</string>
+    <string name="splash_screen_subtitle">Browser</string>
+    <string name="splash_screen_text">"It's clobbering time!"</string>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_text_size">50sp</dimen>
+
+    <dimen name="splash_screen_progress_bar_margin">30dp</dimen>
+    <dimen name="splash_screen_logo_width">200dp</dimen>
+    <dimen name="splash_screen_logo_height">100dp</dimen>
+    <dimen name="splash_screen_logo_margin">200dp</dimen>
+
+    <dimen name="detail_screen_layout_margin">20dp</dimen>
+    <dimen name="detail_screen_layout_padding">3dp</dimen>
+    <dimen name="detail_screen_title_padding">20dp</dimen>
+    <dimen name="detail_screen_expandable_list_height">300dp</dimen>
+</resources>

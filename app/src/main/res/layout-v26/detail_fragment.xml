@@ -22,6 +22,9 @@
 
                 <TextView
                     android:id="@+id/character_detail_name"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="20sp"
+                    android:autoSizeStepGranularity="2sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/detail_screen_layout_margin"
@@ -29,10 +32,6 @@
                     android:paddingBottom="@dimen/detail_screen_title_padding"
                     android:textAllCaps="true"
                     android:textSize="@dimen/title_text_size"
-                    app:autoSizeMaxTextSize="@dimen/title_text_size"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -52,12 +51,12 @@
                     tools:src="@mipmap/ic_launcher" />
 
                 <TextView
+                    android:background="@drawable/image_border_thin"
                     android:id="@+id/character_detail_description"
+                    android:padding="5dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/detail_screen_layout_margin"
-                    android:background="@drawable/image_border_thin"
-                    android:padding="5dp"
                     app:layout_constraintBottom_toTopOf="@id/comic_list_view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent    "

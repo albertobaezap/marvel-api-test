@@ -10,6 +10,7 @@ Support libraries:
 * [Kodein](https://docs.kodein.org/kodein-di/7.1.0/index.html) for dependency injection.
 * [Picasso](https://square.github.io/picasso/) for image loading.
 * [Timber](https://github.com/JakeWharton/timber) for logging purposes.
+* [Kakao] (https://github.com/agoda-com/Kakao) for Unit testing
 
 Also I'm using [Kotlin coroutines](https://developer.android.com/kotlin/coroutines), [Navigation components](https://developer.android.com/guide/navigation) and [Data binding](https://developer.android.com/topic/libraries/data-binding)
 
@@ -36,6 +37,8 @@ Also I used a generic ExpandableListAdapter which is a pretty way of displaying 
 For the main/detail fragments, I used databinding and Picasso to paint all the images/data in the layout.
 ViewModels are pretty simple this time since we have the Store in the data layer to handle the repository function but will be there for architecture purposes.
 
+**Testing**
+Tried to make a simple test by using Kakao since it's the easiest library I know for Unit testing but Kodein dependencies proved to be too difficult for a single test so I've just left an skeleton. (Needs more investigation)
 ___
 
 **Install**

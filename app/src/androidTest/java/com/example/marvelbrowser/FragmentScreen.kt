@@ -1,10 +1,16 @@
 package com.example.marvelbrowser
 
+import android.os.Bundle
+import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.agoda.kakao.screen.Screen
-import com.agoda.kakao.screen.Screen.Companion.onScreen
 import com.agoda.kakao.text.KTextView
 import com.example.marvelbrowser.ui.main.DetailFragment
+import com.example.marvelbrowser.ui.main.MainFragment.Companion.CHARACTER_ID_ARG
 import com.example.marvelbrowser.util.FragmentTestRule
 import org.junit.Rule
 import org.junit.Test
@@ -17,18 +23,18 @@ class FragmentScreen : Screen<FragmentScreen>() {
 @RunWith(AndroidJUnit4::class)
 class FragmentTest {
 
-    @Rule @JvmField
+    @Rule
+    @JvmField
     val fragmentRule = FragmentTestRule(DetailFragment::class.java)
 
     @Test
     fun showItemName() {
-
-        fragmentRule.launchActivity(null)
-
-        onScreen<FragmentScreen> {
-            text {
-                hasText("Random superhero")
+        val scenario = launchFragmentInContainer<DetailFragment>(
+            Bundle().apply {
+                putInt(CHARACTER_ID_ARG, 0)
             }
-        }
+        )
+        onView(withId(R.id.character_detail_name)).check(matches(withText("Random superhero")))
+
     }
 }

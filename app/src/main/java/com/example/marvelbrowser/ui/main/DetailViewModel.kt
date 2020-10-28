@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.marvelbrowser.data.CharacterStoreController
 import com.example.marvelbrowser.model.Character
+import org.jetbrains.annotations.TestOnly
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
