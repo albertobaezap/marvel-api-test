@@ -65,6 +65,10 @@ class CharacterStoreController(private val marvelApiService: MarvelApi) {
 
                             //Expose the live data
                             characterListLiveData.postValue(characterList)
+                        } else {
+                            Timber.e("There was a problem retrieving the list ${it.message()}")
+                            characterListLiveData.postValue(null)
+                            return@launch
                         }
                     }
                 } catch (e: JsonSyntaxException) {
