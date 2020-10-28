@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.marvelbrowser.data.CharacterStoreController
 import com.example.marvelbrowser.databinding.DetailFragmentBinding
 import com.example.marvelbrowser.model.Character
 import com.example.marvelbrowser.model.ItemType
@@ -18,7 +17,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 /**
  * Detail fragment for an individual [Character]
@@ -32,6 +30,8 @@ class DetailFragment : Fragment(), KodeinAware {
     private lateinit var binding: DetailFragmentBinding
 
     private val safeArgs: DetailFragmentArgs by navArgs()
+
+    override fun onSaveInstanceState(outState: Bundle) {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +49,7 @@ class DetailFragment : Fragment(), KodeinAware {
     /**
      * Populate all the necessary views.
      */
-    private fun setupViews() {
+    fun setupViews() {
         with(binding) {
 
             detailViewModel.getCharacterData(safeArgs.characterId)?.let { character ->

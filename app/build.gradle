@@ -25,6 +25,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -69,9 +71,12 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
     implementation "androidx.navigation:navigation-dynamic-features-fragment:2.3.1"
-    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.android.support:multidex:1.0.3'
 
     //Kodein
     implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
@@ -99,4 +104,10 @@ dependencies {
     //TextView
     implementation 'com.github.deano2390:FlowTextView:2.0.5'
 
+    //Tests
+    androidTestImplementation 'com.agoda.kakao:kakao:2.0.0'
+
+    debugImplementation('androidx.fragment:fragment-testing:1.2.5') {
+        exclude group: 'androidx.test', module: 'monitor'
+    }
 }

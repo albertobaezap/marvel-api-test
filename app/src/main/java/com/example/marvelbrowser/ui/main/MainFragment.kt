@@ -25,7 +25,7 @@ import timber.log.Timber
 class MainFragment : Fragment(), KodeinAware {
 
     companion object {
-        private const val CHARACTER_ID_ARG = "characterId"
+        const val CHARACTER_ID_ARG = "characterId"
     }
 
     override val kodein: Kodein by closestKodein()

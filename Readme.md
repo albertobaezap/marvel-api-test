@@ -29,7 +29,7 @@ All the data classes for the API, which I preferred to create manually instead o
 We only have the API service here. It was created the coroutines version of Retrofit since I'm more comfortable using them than having to import RX or use callbacks.
 Even though I implemented both GET methods, I'll only be using one of them.
 
-**UI layer*
+**UI layer**
 Divided between adapters and main (fragments and viewmodels).
 For adapters, I'll be using a single list adapter to display all the character list with the name and a thumbnail of the character, which is generated dynamically.
 Also I used a generic ExpandableListAdapter which is a pretty way of displaying all the comic, events, etc... 
