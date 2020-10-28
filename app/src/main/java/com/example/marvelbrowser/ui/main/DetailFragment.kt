@@ -27,7 +27,7 @@ class DetailFragment : Fragment(), KodeinAware {
 
     override val kodein: Kodein by closestKodein()
 
-    private val characterStoreController: CharacterStoreController by instance()
+    private val detailViewModel: DetailViewModel by instance()
 
     private lateinit var binding: DetailFragmentBinding
 
@@ -52,7 +52,7 @@ class DetailFragment : Fragment(), KodeinAware {
     private fun setupViews() {
         with(binding) {
 
-            characterStoreController.getCharacterData(safeArgs.characterId)?.let { character ->
+            detailViewModel.getCharacterData(safeArgs.characterId)?.let { character ->
                 characterDetailName.text = character.name
 
                 if (character.description.isNotEmpty()) {
