@@ -10,27 +10,32 @@ Support libraries:
 * [Kodein](https://docs.kodein.org/kodein-di/7.1.0/index.html) for dependency injection.
 * [Picasso](https://square.github.io/picasso/) for image loading.
 * [Timber](https://github.com/JakeWharton/timber) for logging purposes.
-* [Kakao] (https://github.com/agoda-com/Kakao) for Unit testing
+* [Kakao](https://github.com/agoda-com/Kakao) for Unit testing
 
 Also I'm using [Kotlin coroutines](https://developer.android.com/kotlin/coroutines), [Navigation components](https://developer.android.com/guide/navigation) and [Data binding](https://developer.android.com/topic/libraries/data-binding)
 
 App's package skeleton is divided in data (repository/state function), di (for dependency injection), model (data models), network (all network/Retrofit stuff) and ui (activities/adapters).
 
 **Data layer**
+
 Since we have to download a big number of characters in a "paged" way (maximum 100 per request) I decided it was better to have a single instance of the character list in order to survive the whole lifecycle of the App. 
 I created a pseudo-Store class with the single purpose of populating and storing the list and provide it to the ViewModels instead of retrieving the list from there.
 
 **DI layer**
+
 All the dependency injection here using Kodein. I divided the modules between Activity (anything UI-related), Network (mainly retrofit) and ViewModels (and their factory methods).
 
 **Model layer**
+
 All the data classes for the API, which I preferred to create manually instead of using a POJO-generation plugin since I'm only going to use a small portion of the API.
 
 **Network layer**
+
 We only have the API service here. It was created the coroutines version of Retrofit since I'm more comfortable using them than having to import RX or use callbacks.
 Even though I implemented both GET methods, I'll only be using one of them.
 
 **UI layer**
+
 Divided between adapters and main (fragments and viewmodels).
 For adapters, I'll be using a single list adapter to display all the character list with the name and a thumbnail of the character, which is generated dynamically.
 Also I used a generic ExpandableListAdapter which is a pretty way of displaying all the comic, events, etc... 
@@ -38,6 +43,7 @@ For the main/detail fragments, I used databinding and Picasso to paint all the i
 ViewModels are pretty simple this time since we have the Store in the data layer to handle the repository function but will be there for architecture purposes.
 
 **Testing**
+
 Tried to make a simple test by using Kakao since it's the easiest library I know for Unit testing but Kodein dependencies proved to be too difficult for a single test so I've just left an skeleton. (Needs more investigation)
 ___
 
