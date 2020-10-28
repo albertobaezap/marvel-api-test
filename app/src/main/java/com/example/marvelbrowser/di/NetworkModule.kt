@@ -14,6 +14,9 @@ import org.kodein.di.generic.singleton
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Kodein module for all the network dependencies.
+ */
 val networkModule = Kodein.Module("NetworkModule") {
 
     bind<OkHttpClient>() with singleton {

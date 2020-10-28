@@ -8,12 +8,18 @@ import retrofit2.http.Query
 
 interface MarvelApi {
 
+    /**
+     * Retrieve the whole character list.
+     */
     @GET("/v1/public/characters")
     suspend fun getCharacterList(
         @Query("offset") offset: Int,
         @Query("limit") limit: Int
     ): Response<CharacterDataWrapper>
 
+    /**
+     * Retrieve an specific character.
+     */
     @GET("/v1/public/characters/{id}")
     suspend fun getCharacter(
         @Path("id") id: Int

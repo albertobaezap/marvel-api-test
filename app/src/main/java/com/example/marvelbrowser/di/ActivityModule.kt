@@ -9,6 +9,9 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 
+/**
+ * Kodein module for all the Activity/UI dependencies.
+ */
 val activityModule = Kodein.Module("ActivityModule") {
     bind<ViewModelProvider.Factory>() with singleton {
         ViewModelFactory(kodein.direct)

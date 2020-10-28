@@ -11,6 +11,9 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import timber.log.Timber
 
+/**
+ * Store for handling all operations related to characters. Provides a static storage for the character list.
+ */
 class CharacterStoreController(private val marvelApiService: MarvelApi) {
 
     companion object {
@@ -19,13 +22,16 @@ class CharacterStoreController(private val marvelApiService: MarvelApi) {
 
     private val scope = CoroutineScope(Job())
 
+    // Static character list
     private var characterList: MutableList<Character> = mutableListOf()
     private val characterListLiveData: MutableLiveData<List<Character>> = MutableLiveData()
 
     init {
+        //Load list on init
         loadCharacterList()
     }
 
+    // Expose the actual list
     fun getCharacterListLiveData(): LiveData<List<Character>> = characterListLiveData
 
     /**
@@ -38,6 +44,10 @@ class CharacterStoreController(private val marvelApiService: MarvelApi) {
             var count = 0
             var total = REQUEST_LIMIT
 
+            /**
+             * Since we can only retrieve batches of 100 character max, we have to repeat this operation to fill the list
+             * until we've got everyone.
+             */
             while (count < total) {
 
                 try {
@@ -45,11 +55,15 @@ class CharacterStoreController(private val marvelApiService: MarvelApi) {
                         if (it.isSuccessful) {
                             val wrapper = it.body()!!
 
+                            //Update the total values for the next iteration
                             offset += REQUEST_LIMIT
                             total = wrapper.data.total
                             count += wrapper.data.count
+
+                            //Update the list
                             characterList.addAll(wrapper.data.results)
-                            Timber.d("Adding new results: ${characterList.count()}")
+
+                            //Expose the live data
                             characterListLiveData.postValue(characterList)
                         }
                     }
@@ -64,4 +78,11 @@ class CharacterStoreController(private val marvelApiService: MarvelApi) {
             Timber.e("Error when getting characters ${e.response()}")
         }
     }
+
+    /**
+     * Gets an individual character data.
+     * @param characterId Required character's identifier.
+     */
+    fun getCharacterData(characterId: Int): Character? =
+        characterList.firstOrNull { it.id == characterId }
 }

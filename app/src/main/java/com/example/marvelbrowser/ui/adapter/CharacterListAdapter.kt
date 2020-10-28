@@ -1,6 +1,5 @@
 package com.example.marvelbrowser.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,11 @@ import com.example.marvelbrowser.GenericDiff
 import com.example.marvelbrowser.databinding.CharacterListItemBinding
 import com.example.marvelbrowser.model.Character
 import com.squareup.picasso.Picasso
-import timber.log.Timber
 
-class CharacterListAdapter(private val context: Context, private val onItemClicked: (Int) -> Unit) :
+/**
+ * Adapter class for the [Character] list.
+ */
+class CharacterListAdapter(private val onItemClicked: (Int) -> Unit) :
     RecyclerView.Adapter<CharacterListAdapter.CharacterListItemHolder>() {
 
     companion object {
@@ -20,6 +21,7 @@ class CharacterListAdapter(private val context: Context, private val onItemClick
         const val LOAD_IMAGE_TAG = "load_image"
     }
 
+    // Inner character list with a diff method to skip duplicate items.
     var characterList: List<Character> = mutableListOf()
         set(value) {
             val diffResult = DiffUtil.calculateDiff(GenericDiff(field, value) { it.id })
@@ -55,6 +57,7 @@ class CharacterListAdapter(private val context: Context, private val onItemClick
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
+        // Binds a Character to a view.
         fun bindCharacter(character: Character) {
             with(binding) {
                 characterItemName.text = character.name

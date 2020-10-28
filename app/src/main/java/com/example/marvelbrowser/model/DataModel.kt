@@ -1,14 +1,11 @@
 package com.example.marvelbrowser.model
 
-import java.util.*
+/**
+ * API Network model and types.
+ * API defined here: https://developer.marvel.com/docs#!/public
+ */
 
 typealias Url = String
-
-enum class UrlType(name: String) {
-    DETAIL("detail"),
-    WIKI("wiki"),
-    COMICLINK("comiclink")
-}
 
 data class CharacterDataWrapper(
     val code: Int?,
@@ -28,7 +25,7 @@ data class CharacterDataContainer(
     val results: List<Character>
 )
 
-//Data class for every Marvel character
+//Actual data class for every Marvel character
 data class Character(
     val id: Int,
     val name: String,
@@ -44,7 +41,7 @@ data class Character(
 )
 
 data class UrlObject(
-    val type: UrlType,
+    val type: String,
     val url: Url
 )
 
@@ -53,8 +50,8 @@ data class Image(
     val extension: String
 )
 
-enum class ItemType {
-    COMIC, EVENT, STORY, SERIES
+enum class ItemType(name: String) {
+    COMIC("COMICS"), EVENT("EVENTS"), STORY("STORIES"), SERIES("SERIES")
 }
 
 //Too much class duplication but will leave it like this for the sake of extension.
