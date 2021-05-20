@@ -2,10 +2,8 @@ package com.example.marvelbrowser
 
 import android.app.Application
 import android.content.Context
+import com.example.marvelbrowser.app.di.networkModule
 import com.example.marvelbrowser.data.CharacterStoreController
-import com.example.marvelbrowser.di.activityModule
-import com.example.marvelbrowser.di.networkModule
-import com.example.marvelbrowser.di.viewModelModule
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.bind
@@ -21,10 +19,7 @@ private var appInstance: Application by Delegates.notNull()
  */
 class MarvelApp: Application(), KodeinAware {
     override val kodein = Kodein.lazy {
-        import(appModule)
-        import(activityModule)
         import(networkModule)
-        import(viewModelModule)
     }
 
     override fun onCreate() {
@@ -33,12 +28,5 @@ class MarvelApp: Application(), KodeinAware {
 
         //Plant timber tree for logging purposes
         Timber.plant(Timber.DebugTree())
-    }
-}
-
-val appModule = Kodein.Module("AppModule") {
-    bind<Context>() with singleton { appInstance }
-    bind<CharacterStoreController>() with singleton {
-        CharacterStoreController(instance())
     }
 }

@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.marvelbrowser.MainActivity;
+import com.example.marvelbrowser.presentation.main.MainActivity;
 import com.example.marvelbrowser.R;
 
 import org.junit.Assert;

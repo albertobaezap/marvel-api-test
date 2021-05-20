@@ -1,8 +1,9 @@
-package com.example.marvelbrowser.di
+package com.example.marvelbrowser.app.di
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
+import com.example.marvelbrowser.app.base.BasePresenter
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.direct

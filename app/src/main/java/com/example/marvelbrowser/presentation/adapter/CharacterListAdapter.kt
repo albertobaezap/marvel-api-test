@@ -1,13 +1,13 @@
-package com.example.marvelbrowser.ui.adapter
+package com.example.marvelbrowser.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.marvelbrowser.GenericDiff
+import com.example.marvelbrowser.app.utils.GenericDiff
 import com.example.marvelbrowser.databinding.CharacterListItemBinding
-import com.example.marvelbrowser.model.Character
+import com.example.marvelbrowser.domain.entities.Character
 import com.squareup.picasso.Picasso
 
 /**

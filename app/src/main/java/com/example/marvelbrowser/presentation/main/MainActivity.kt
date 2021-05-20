@@ -1,8 +1,8 @@
-package com.example.marvelbrowser
+package com.example.marvelbrowser.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.marvelbrowser.ui.main.MainFragment
+import com.example.marvelbrowser.R
 
 /**
  * Empty main activity.

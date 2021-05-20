@@ -1,4 +1,4 @@
-package com.example.marvelbrowser.ui.adapter
+package com.example.marvelbrowser.presentation.adapter
 
 import android.content.Context
 import android.graphics.Typeface

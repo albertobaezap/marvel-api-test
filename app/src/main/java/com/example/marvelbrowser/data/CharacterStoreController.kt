@@ -2,11 +2,11 @@ package com.example.marvelbrowser.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.marvelbrowser.model.Character
 import com.example.marvelbrowser.network.MarvelApi
 import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import com.example.marvelbrowser.domain.entities.Character
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import timber.log.Timber
@@ -23,7 +23,7 @@ class CharacterStoreController(private val marvelApiService: MarvelApi) {
     private val scope = CoroutineScope(Job())
 
     // Static character list
-    private var characterList: MutableList<Character> = mutableListOf()
+    private var characterList: MutableList<com.example.marvelbrowser.domain.entities.Character> = mutableListOf()
     private val characterListLiveData: MutableLiveData<List<Character>> = MutableLiveData()
 
     init {

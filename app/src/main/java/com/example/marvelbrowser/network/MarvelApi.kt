@@ -1,6 +1,6 @@
 package com.example.marvelbrowser.network
 
-import com.example.marvelbrowser.model.CharacterDataWrapper
+import com.example.marvelbrowser.domain.entities.CharacterDataWrapper
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

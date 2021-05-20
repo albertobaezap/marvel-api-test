@@ -1,4 +1,4 @@
-package com.example.marvelbrowser
+package com.example.marvelbrowser.app.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import java.security.MessageDigest

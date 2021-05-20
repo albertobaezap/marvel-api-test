@@ -1,9 +1,14 @@
-package com.example.marvelbrowser.di
+package com.example.marvelbrowser.app.di
 
 import com.example.marvelbrowser.BuildConfig
-import com.example.marvelbrowser.md5
+import com.example.marvelbrowser.app.utils.md5
+import com.example.marvelbrowser.app.utils.toHex
+import com.example.marvelbrowser.data.character.CharacterDataRepository
+import com.example.marvelbrowser.data.character.remote.CharacterRemoteDataSource
+import com.example.marvelbrowser.domain.repositories.CharacterRepository
+import com.example.marvelbrowser.domain.usecases.GetCharacter
+import com.example.marvelbrowser.domain.usecases.GetCharacterList
 import com.example.marvelbrowser.network.MarvelApi
-import com.example.marvelbrowser.toHex
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,6 +33,10 @@ val networkModule = Kodein.Module("NetworkModule") {
 
     bind<Retrofit>() with singleton { getRetrofitInstance(instance()) }
     bind<MarvelApi>() with singleton { getMarvelAppService(instance()) }
+    bind<CharacterRemoteDataSource>() with singleton { getCharacterRemoteDataSource(instance()) }
+    bind<CharacterRepository>() with singleton { getCharacterRepository(instance()) }
+    bind<GetCharacterList>() with singleton { getCharacterList(instance())}
+    bind<GetCharacter>() with singleton { getCharacter((instance())) }
 }
 
 /**
@@ -58,3 +67,13 @@ private fun getRetrofitInstance(client: OkHttpClient) =
 
 private fun getMarvelAppService(retrofit: Retrofit) =
     retrofit.create(MarvelApi::class.java)
+
+private fun getCharacterRemoteDataSource(apiService: MarvelApi) = CharacterRemoteDataSource(apiService)
+
+private fun getCharacterRepository(remoteDataSource: CharacterRemoteDataSource) = CharacterDataRepository(remoteDataSource)
+
+private fun getCharacterList(repository: CharacterRepository) =
+    GetCharacterList(repository)
+
+private fun getCharacter(repository: CharacterRepository) =
+    GetCharacter(repository)
