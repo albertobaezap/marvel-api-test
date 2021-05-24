@@ -1,6 +1,7 @@
-package com.example.myapplication
+package com.example.marvelbrowser.app
 
-import android.content.Context
+import com.example.marvelbrowser.data.network.MarvelApi
+import com.example.myapplication.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -10,7 +11,7 @@ import java.security.MessageDigest
 fun String.md5(): ByteArray = MessageDigest.getInstance("MD5").digest(this.toByteArray())
 fun ByteArray.toHex() = joinToString("") { "%02x".format(it) }
 
-class Network(context: Context) {
+class Network {
 
     val service: MarvelApi = buildRetrofit().create(MarvelApi::class.java)
 

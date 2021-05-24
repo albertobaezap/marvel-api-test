@@ -1,5 +1,6 @@
-package com.example.myapplication
+package com.example.marvelbrowser.data.network
 
+import com.example.marvelbrowser.domain.entities.CharacterDataWrapper
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

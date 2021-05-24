@@ -1,8 +1,9 @@
-package com.example.myapplication
+package com.example.marvelbrowser.presentation.ui
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.example.myapplication.R
 import kotlinx.coroutines.*
 
 class SplashActivity: Activity() {

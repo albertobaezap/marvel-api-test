@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.marvelbrowser.domain.entities
 
 data class CharacterDataWrapper(
     val data: CharacterDataContainer,
