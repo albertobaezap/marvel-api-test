@@ -1,0 +1,33 @@
+[project]
+name = "marvel-api-test"
+
+[plugins.git]
+enabled = true
+
+[plugins.git.config]
+main_branch = "master"
+default_remote = "origin"
+
+[plugins.github]
+enabled = true
+
+[plugins.github.config]
+repo_owner = "albertobaezap"
+repo_name = "marvel-api-test"
+default_branch = "master"
+auto_assign_prs = true
+
+[plugins.jira]
+enabled = false
+
+[plugins.ragnarok]
+enabled = true
+
+[plugins.ragnarok.source]
+channel = "stable"
+repo_url = "https://github.com/masmovil/ragnarok-titan-cli-workflows"
+requested_ref = "0.8.0"
+resolved_commit = "03da366a7d3422f568f6e59e6de291085d54aa9d"
+
+[plugins.ragnarok.config]
+platform = "android"
